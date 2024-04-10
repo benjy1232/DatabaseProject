@@ -1,3 +1,5 @@
+USE musiclibrary;
+
 INSERT INTO Artist VALUES
 (1, 'FKJ'),
 (2, 'MAMAMOO'),
