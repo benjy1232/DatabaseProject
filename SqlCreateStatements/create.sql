@@ -35,19 +35,3 @@ CREATE TABLE Genre (
     name VARCHAR(50) NOT NULL,
     PRIMARY KEY (id)
 );
-
-# For User use Basic Authentication and unhashed passwords (Not good practice)
-CREATE TABLE User (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    user_name VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL,
-    PRIMARY KEY (id)
-);
-
-# Each users library is obtained from this large table connecting the user to the songs they own
-CREATE TABLE UserSongs (
-    user_id INT UNSIGNED NOT NULL,
-    song_id INT UNSIGNED NOT NULL,
-    CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES User (id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT fk_song_id FOREIGN KEY (song_id) REFERENCES Song (id) ON DELETE RESTRICT ON UPDATE CASCADE
-);
