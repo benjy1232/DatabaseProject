@@ -28,10 +28,16 @@ INSERT INTO Album VALUES
 (14, 'THE BOOK 2', 2021 , 8);
 COMMIT;
 
+INSERT INTO Genre VALUES
+(1, 'Jazz'),
+(2, 'Alternative'),
+(3, 'Math Rock');
+COMMIT;
+
 -- More songs could still be added but this is a good start
 INSERT INTO Song VALUES
-(1, 'Different Masks for Different Days', 1, 3),
-(2, 'UNDERSTAND', 4, 7),
-(3, 'Canggu', 1, 1),
-(4, 'G.O.A.T.', 5, 8);
+(1, 'Different Masks for Different Days', 1, 3, 1),
+(2, 'UNDERSTAND', 4, 7, 2),
+(3, 'Canggu', 1, 1, NULL),
+(4, 'G.O.A.T.', 5, 8, 3);
 COMMIT;
