@@ -1,0 +1,31 @@
+@model DatabaseProject.Controllers.LibraryController
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Music Library</title>
+</head>
+<body>
+<div>
+    <p>
+        This is the music library controller
+        <table>
+            <tr>
+                <th>Song</th>
+                <th>Album</th>
+                <th>Release Year</th>
+                <th>Artist</th>
+                <th>Album Artist</th>
+                <th>Genre</th>
+            </tr>
+            @Html.Raw(ViewBag.Table)
+        </table>
+    </p>
+</div>
+</body>
+</html>
