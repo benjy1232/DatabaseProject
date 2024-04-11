@@ -1,0 +1,24 @@
+@model DatabaseProject.Controllers.ArtistController
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Artists";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Artists</title>
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+            <th>Artist</th>
+        </tr>
+        @Html.Raw(ViewBag.Table)
+    </table>
+</div>
+</body>
+</html>
