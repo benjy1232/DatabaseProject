@@ -20,5 +20,54 @@
         @Html.Raw(ViewBag.Table)
     </table>
 </div>
+<div style="margin: auto">
+    <div>
+        @using (Html.BeginForm("DeleteArtist", "Artist", FormMethod.Post))
+        {
+            <fieldset>
+                Artist Name
+
+                @Html.DropDownList("id", ViewBag.ArtistNames as IEnumerable<SelectListItem>)
+            </fieldset>
+            <p>
+                <input type="submit" value="Delete"/>
+            </p>
+        }
+    </div>
+
+    <div>
+        @using (Html.BeginForm("UpdateArtist", "Artist", FormMethod.Post))
+        {
+            <fieldset>
+                <div>
+                    Artist Name
+                    @Html.DropDownList("id", ViewBag.ArtistNames as IEnumerable<SelectListItem>)
+                </div>
+                <div>
+                    Updated Artist Name
+                    @Html.TextBox("artistName")
+                </div>
+            </fieldset>
+            <p>
+                <input type="submit" value="Update"/>
+            </p>
+        }
+    </div>
+
+    <div>
+        @using (Html.BeginForm("AddNewArtist", "Artist", FormMethod.Post))
+        {
+        <fieldset>
+            <div>
+                Artist Name
+                @Html.TextBox("artistName")
+            </div>
+        </fieldset>
+        <p>
+            <input type="submit" value="Add"/>
+        </p>
+        }
+    </div>
+</div>
 </body>
 </html>

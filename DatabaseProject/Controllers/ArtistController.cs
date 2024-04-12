@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MySql.Data.MySqlClient;
 
 namespace DatabaseProject.Controllers;
@@ -8,6 +9,7 @@ public class ArtistController(ILogger<ArtistController> logger, IConfiguration c
     // GET
     public IActionResult Index()
     {
+        ViewBag.ArtistNames = GetArtists();
         CreateArtistsTable();
         return View();
     }
@@ -41,7 +43,7 @@ public class ArtistController(ILogger<ArtistController> logger, IConfiguration c
      }
 
     // Should be the same or similar for new album and new song
-    public void AddNewArtist(string artistName)
+    public IActionResult AddNewArtist(string artistName)
     {
         try
         {
@@ -56,47 +58,90 @@ public class ArtistController(ILogger<ArtistController> logger, IConfiguration c
         }
         catch (MySqlException ex)
         {
+            if (ex.Number == 1065)
+            {
+                logger.LogError($"Entry {artistName} already exists");
+                return RedirectToAction("Index");
+            }
             logger.LogError($"Error {ex.Number} has occurred: {ex.Message}");
             throw;
         }
+
+        return RedirectToAction("Index");
     }
 
-    public void DeleteArtist(string artistName)
+    public IActionResult DeleteArtist(uint id)
     {
         try
         {
             using var connection = new MySqlConnection(configuration.GetConnectionString("mySqlConn"));
             connection.Open();
             using var command = connection.CreateCommand();
-            command.CommandText = "DELETE FROM Artist WHERE artist_name = @artistName";
+            command.CommandText = "DELETE FROM Artist WHERE id = @id";
+            command.Parameters.AddWithValue("@id", id);
+            command.Prepare();
+            int rowAffected = command.ExecuteNonQuery();
+            logger.LogInformation($"Command String: {command.CommandText} ID: {id}");
+            logger.LogInformation($"Number of rows affected {rowAffected}");
+        }
+        catch (MySqlException ex)
+        {
+            logger.LogError($"Error {ex.Number} has occurred: {ex.Message}");
+            throw;
+        }
+
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult UpdateArtist(uint id, string artistName)
+    {
+        try
+        {
+            using var connection = new MySqlConnection(configuration.GetConnectionString("mySqlConn"));
+            connection.Open();
+            using var command = connection.CreateCommand();
+            command.CommandText = "UPDATE Artist SET artist_name = @artistName WHERE id = @id";
             command.Parameters.AddWithValue("@artistName", artistName);
+            command.Parameters.AddWithValue("@id", id);
             command.Prepare();
             command.ExecuteNonQuery();
         }
         catch (MySqlException ex)
         {
+            if (ex.Number == 1065)
+            {
+                logger.LogError($"Entry {artistName} already exists");
+                return RedirectToAction("Index");
+            }
             logger.LogError($"Error {ex.Number} has occurred: {ex.Message}");
             throw;
         }
+
+        return RedirectToAction("Index");
     }
 
-    public void UpdateArtist(string oldName, string newArtistName)
+    private List<SelectListItem> GetArtists()
     {
+        List<SelectListItem> artists = new List<SelectListItem>();
         try
         {
             using var connection = new MySqlConnection(configuration.GetConnectionString("mySqlConn"));
             connection.Open();
             using var command = connection.CreateCommand();
-            command.CommandText = "UPDATE Artist SET artist_name = @newArtistName WHERE artist_name = @oldArtistName";
-            command.Parameters.AddWithValue("@newArtistName", newArtistName);
-            command.Parameters.AddWithValue("@oldArtistName", oldName);
-            command.Prepare();
-            command.ExecuteNonQuery();
+            // id, artist_name
+            command.CommandText = "SELECT * FROM Artist";
+            
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                artists.Add(new SelectListItem(reader[1].ToString(), reader[0].ToString()));
+            }
         }
         catch (MySqlException ex)
         {
             logger.LogError($"Error {ex.Number} has occurred: {ex.Message}");
             throw;
         }
+        return artists;
     }
 }
