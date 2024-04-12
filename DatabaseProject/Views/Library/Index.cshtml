@@ -7,28 +7,106 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
     <title>Music Library</title>
 </head>
 <body>
 <div>
-    <p>
-        Welcome to this large Music Database that has no checks on what you are able to destroy with it :))
-        <table>
-            <tr>
-                <th>Song</th>
-                <th>Album</th>
-                <th>Release Year</th>
-                <th>Artist</th>
-                <th>Album Artist</th>
-                <th>Genre</th>
-            </tr>
-            @Html.Raw(ViewBag.Table)
-        </table>
-    </p>
+    <p>Welcome to this large Music Database that has no checks on what you are able to destroy with it :))</p>
+    <table>
+        <tr>
+            <th>Song</th>
+            <th>Album</th>
+            <th>Release Year</th>
+            <th>Artist</th>
+            <th>Album Artist</th>
+            <th>Genre</th>
+        </tr>
+        @Html.Raw(ViewBag.Table)
+    </table>
+    <div>
+        @using (Html.BeginForm("AddSong", "Library", FormMethod.Post))
+        {
+            <fieldset>
+                <div>
+                    <div>
+                        Song Name
+                        @Html.TextBox("songName")
+                    </div>
+
+                    <div>
+                        Album
+                        @Html.DropDownList("albumId", ViewBag.Albums as List<SelectListItem>)
+                    </div>
+
+                    <div>
+                        Artist
+                        @Html.DropDownList("artistId", ViewBag.Artists as List<SelectListItem>)
+                    </div>
+
+                    <div>
+                        Genre
+                        @Html.DropDownList("genreId", ViewBag.Genres as List<SelectListItem>)
+                    </div>
+                </div>
+            </fieldset>
+            <p>
+                <input type="submit" value="Add New Song"/>
+            </p>
+        }
+    </div>
     
     <div>
+        @using (Html.BeginForm("UpdateSong", "Library", FormMethod.Post))
+        {
+            <fieldset>
+                <div>
+                    <div>
+                        Song Name
+                        @Html.DropDownList("songId", ViewBag.Songs as List<SelectListItem>)
+                    </div>
+                    <div>
+                        New Song Name
+                        @Html.TextBox("songName")
+                    </div>
+                    <div>
+                        Album
+                        @Html.DropDownList("albumId", ViewBag.Albums as List<SelectListItem>, "-")
+                    </div>
+
+                    <div>
+                        Artist
+                        @Html.DropDownList("artistId", ViewBag.Artists as List<SelectListItem>, "-")
+                    </div>
+                    <div>
+                        Updating Genre?
+                        @Html.CheckBox("updateGenre", false)
+
+                        Genre
+                        @Html.DropDownList("genreId", ViewBag.Genres as List<SelectListItem>, "-")                   
+                    </div>
+
+                </div>
+            </fieldset>
+            <p>
+                <input type="submit" value="Update Song"/>
+            </p>
+        }
+    </div>
+    <div>
+        @using (Html.BeginForm("DeleteSong", "Library", FormMethod.Post))
+        {
+            <fieldset>
+                <div>
+                    Song Name
+                    @Html.DropDownList("songId", ViewBag.Songs as List<SelectListItem>)
+                </div>
+            </fieldset>
+            <p>
+                <input type="submit" value="Delete Song"/>
+            </p>
+        }
     </div>
 </div>
 </body>
