@@ -29,7 +29,7 @@ public class LibraryController(ILogger<LibraryController> logger, IConfiguration
             using var connection = new MySqlConnection(configuration.GetConnectionString("mySqlConn"));
             connection.Open();
             string commandString = """
-                                   SELECT song_title, A.album_name, A.release_year, M.artist_name, G.name, AA.artist_name FROM Song
+                                   SELECT song_title, A.album_name, A.release_year, M.artist_name, G.genre_name, AA.artist_name FROM Song
                                    INNER JOIN Album A ON A.id = album_id
                                    INNER JOIN Artist M ON M.id = Song.artist_id
                                    INNER JOIN Artist AA ON AA.id = A.artist_id
