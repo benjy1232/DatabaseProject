@@ -31,7 +31,7 @@ CREATE TABLE Song (
     album_id INT UNSIGNED NOT NULL,
     genre_id SMALLINT UNSIGNED,
     PRIMARY KEY (id),
-    UNIQUE (song_title, album_id),
+    UNIQUE (song_title, artist_id, album_id),
     CONSTRAINT fk_song_album FOREIGN KEY (album_id) REFERENCES Album (id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_song_artist FOREIGN KEY (artist_id) REFERENCES Artist (id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_song_genre FOREIGN KEY (genre_id) REFERENCES Genre (id) ON DELETE CASCADE ON UPDATE CASCADE
