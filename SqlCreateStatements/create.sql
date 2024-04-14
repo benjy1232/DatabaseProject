@@ -19,7 +19,7 @@ CREATE TABLE Album (
 
 CREATE TABLE Genre (
                        id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-                       name VARCHAR(50) NOT NULL,
+                       genre_name VARCHAR(50) NOT NULL,
                        PRIMARY KEY (id)
 );
 
