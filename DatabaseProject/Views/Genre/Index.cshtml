@@ -1,0 +1,72 @@
+﻿@model DatabaseProject.Controllers.GenreController
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Genres";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Genres</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>Genre</th>
+            </tr>
+            @Html.Raw(ViewBag.Table)
+        </table>
+    </div>
+    <div style="margin: auto">
+        <div>
+            @using (Html.BeginForm("DeleteGenre", "Genre", FormMethod.Post))
+            {
+                <fieldset>
+                    Genre Name
+
+                    @Html.DropDownList("id", ViewBag.GenreNames as IEnumerable<SelectListItem>)
+                </fieldset>
+                <p>
+                    <input type="submit" value="Delete" />
+                </p>
+            }
+        </div>
+
+        <div>
+            @using (Html.BeginForm("UpdateGenre", "Genre", FormMethod.Post))
+            {
+                <fieldset>
+                    <div>
+                        Genre Name
+                        @Html.DropDownList("id", ViewBag.GenreNames as IEnumerable<SelectListItem>)
+                    </div>
+                    <div>
+                        Updated Genre Name
+                        @Html.TextBox("genreName")
+                    </div>
+                </fieldset>
+                <p>
+                    <input type="submit" value="Update" />
+                </p>
+            }
+        </div>
+
+        <div>
+            @using (Html.BeginForm("AddNewGenre", "Genre", FormMethod.Post))
+            {
+                <fieldset>
+                    <div>
+                        Genre Name
+                        @Html.TextBox("genreName")
+                    </div>
+                </fieldset>
+                <p>
+                    <input type="submit" value="Add" />
+                </p>
+            }
+        </div>
+    </div>
+</body>
+</html>
