@@ -11,6 +11,7 @@ public class AlbumController(ILogger<AlbumController> logger, IConfiguration con
     public IActionResult Index()
     {
         ViewBag.AlbumNames = GetAlbums();
+        ViewBag.ArtistNames = GetArtists();
         CreateAlbumTable();
         return View();
     }
@@ -152,5 +153,30 @@ public class AlbumController(ILogger<AlbumController> logger, IConfiguration con
             throw;
         }
         return albums;
+    }
+
+    private List<SelectListItem> GetArtists()
+    {
+        List<SelectListItem> artists = new List<SelectListItem>();
+        try
+        {
+            using var connection = new MySqlConnection(configuration.GetConnectionString("mySqlConn"));
+            connection.Open();
+            using var command = connection.CreateCommand();
+            // id, artist_name
+            command.CommandText = "SELECT * FROM Artist";
+
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                artists.Add(new SelectListItem($"{reader[1]}", reader[0].ToString()));
+            }
+        }
+        catch (MySqlException ex)
+        {
+            logger.LogError($"Error {ex.Number} has occurred: {ex.Message}");
+            throw;
+        }
+        return artists;
     }
 }

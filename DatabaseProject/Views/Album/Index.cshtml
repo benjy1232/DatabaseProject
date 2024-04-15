@@ -73,7 +73,7 @@
                     </div>
                     <div>
                         Artist ID
-                        @Html.TextBox("artistId")
+                        @Html.DropDownList("artistId", ViewBag.ArtistNames as IEnumerable<SelectListItem>)
                     </div>
                 </fieldset>
                 <p>
