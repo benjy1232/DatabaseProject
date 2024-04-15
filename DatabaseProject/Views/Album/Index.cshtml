@@ -1,0 +1,86 @@
+﻿@model DatabaseProject.Controllers.AlbumController
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Albums";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Albums</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>Album Name</th>
+                <th>Release Year</th>
+                <th>Album Artist</th>
+            </tr>
+            @Html.Raw(ViewBag.Table)
+        </table>
+    </div>
+    <div style="margin: auto">
+        <div>
+            @using (Html.BeginForm("DeleteAlbum", "Album", FormMethod.Post))
+            {
+                <fieldset>
+                    Album Name
+
+                    @Html.DropDownList("id", ViewBag.AlbumNames as IEnumerable<SelectListItem>)
+                </fieldset>
+                <p>
+                    <input type="submit" value="Delete" />
+                </p>
+            }
+        </div>
+
+        <div>
+            @using (Html.BeginForm("UpdateAlbum", "Album", FormMethod.Post))
+            {
+                <fieldset>
+                    <div>
+                        Album Name
+                        @Html.DropDownList("id", ViewBag.AlbumNames as IEnumerable<SelectListItem>)
+                    </div>
+                    <div>
+                        Updated Album Name
+                        @Html.TextBox("albumName")
+                    </div>
+                    <div>
+                        Updated Release Year
+                        @Html.TextBox("releaseYear")
+                    </div>
+                </fieldset>
+                <p>
+                    <input type="submit" value="Update" />
+                </p>
+            }
+        </div>
+
+        <div>
+            @using (Html.BeginForm("AddNewAlbum", "Album", FormMethod.Post))
+            {
+                <fieldset>
+                    <div>
+                        Album Name
+                        @Html.TextBox("albumName")
+                    </div>
+                    <div>
+                        Release Year
+                        @Html.TextBox("releaseYear")
+                    </div>
+                    <div>
+                        Artist ID
+                        @Html.TextBox("artistId")
+                    </div>
+                </fieldset>
+                <p>
+                    <input type="submit" value="Add" />
+                </p>
+            }
+        </div>
+    </div>
+</body>
+</html>
