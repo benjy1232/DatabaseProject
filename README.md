@@ -118,7 +118,49 @@ Date:   Tue Apr 9 21:36:08 2024 -0500
 
 ### Austin Jacobs
 ```
-Add Git Log Here when ready
+commit 2d2064e98b9b3c2e9dc98b78f040e94b30b2ee7d
+Merge: 4c7d45e 75bdb5b
+Author: Austin <AustinJames1603@gmail.com>
+Date:   Mon Apr 15 19:40:52 2024 -0500
+
+    Merge branch 'austin_album_controller'
+
+commit 75bdb5b140672231de46a34cf1867f5fcc2280f4
+Author: Austin <AustinJames1603@gmail.com>
+Date:   Mon Apr 15 17:16:12 2024 -0500
+
+    Fixed artist_name dropdown functionality
+
+commit 98c759dc939604289858d34d4a1e59d7cb814ed7
+Author: Austin <AustinJames1603@gmail.com>
+Date:   Sun Apr 14 20:57:38 2024 -0500
+
+    Added HTML for Album Controller
+
+commit 309330e7834d62c5ce66a7d289f6293ec5cb8cf8
+Author: Austin <AustinJames1603@gmail.com>
+Date:   Sun Apr 14 15:29:30 2024 -0500
+
+    Added Album Controller
+
+commit 4c7d45e5842e90af85795702d01a5429aae94984
+Merge: e81c796 f8d0ec6
+Author: Austin <AustinJames1603@gmail.com>
+Date:   Sat Apr 13 23:23:57 2024 -0500
+
+    Merge branch 'austin_genreController'
+
+commit f8d0ec657e61c6d53231764d9ce011cb25f60f75
+Author: Austin <AustinJames1603@gmail.com>
+Date:   Sat Apr 13 23:09:26 2024 -0500
+
+    Updated SQL create statements and added html for Genre
+
+commit 16dc8e2862f27cdda046516c316d2fb6c45d5698
+Author: Austin <AustinJames1603@gmail.com>
+Date:   Sat Apr 13 18:52:41 2024 -0500
+
+    Added Genre Controller
 ```
 
 ## Demo Video
