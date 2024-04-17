@@ -1,7 +1,7 @@
 # Music Library Database
 ## Group Members
 - Benjamin Serrano - @benjy1232 - N543Y954
-- Austin Jacobs - @AustinBS - ***MyWSUID HERE***
+- Austin Jacobs - @AustinBS - J522C262
 
 ## Database Schema
 !["Music Database Schema"](musiclibrary.png)
